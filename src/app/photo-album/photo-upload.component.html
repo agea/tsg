@@ -12,9 +12,18 @@
 		<mat-form-field>
 			<input name="cognome" matInput placeholder="Cognome" [(ngModel)]="cognome" required>
 		</mat-form-field>
-		<mat-form-field>
-			<input name="squadra" matInput placeholder="Squadra" [(ngModel)]="squadra" required>
+		<mat-form-field class="team">
+			<mat-select *ngIf="selectTeam" name="squadra" placeholder="Squadra" [(ngModel)]="squadra" required>
+				<mat-option *ngFor="let team of teams | async" [value]="team.name">
+					{{ team.name }}
+				</mat-option>
+			</mat-select>
+			<input *ngIf="!selectTeam" name="squadra" matInput placeholder="Squadra" [(ngModel)]="squadra" required autofocus>
+
 		</mat-form-field>
+		<button mat-mini-fab color="accent" (click)="toggleTeamSelect()">
+			<mat-icon aria-label="add">{{selectTeam?'add':'close'}}</mat-icon>
+		</button>
 
 		<div *ngIf="uploadForm.form.valid">
 			<div class="form_controls">
@@ -32,7 +41,6 @@
 
 		<mat-progress-spinner color="primary" mode="determinate" [value]="response.progress">
 		</mat-progress-spinner>
-
 		<div class="status">
 			<div class="status-code" *ngIf="response.status">Upload completed with status code {{response.status}}</div>
 		</div>

@@ -5,8 +5,7 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 import { MatSnackBar } from '@angular/material';
 
 @Injectable()
-export class KeyGuard implements CanActivate {
-
+export class ReadOnlyGuard implements CanActivate {
   constructor(private cloudinary: Cloudinary, private router: Router, private snackBar: MatSnackBar) { }
 
   canActivate(
@@ -17,9 +16,6 @@ export class KeyGuard implements CanActivate {
       this.router.navigate(['/login']);
       this.snackBar.open('Password non valida', null, { duration: 3000 });
       return false;
-    } else if (!c.upload_preset) {
-      this.router.navigate(['/']);
-      this.snackBar.open('Accesso non consentito', null, { duration: 3000 });
     }
     return true;
   }

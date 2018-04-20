@@ -3,7 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { PhotoAlbum } from '../model/photo-album.service';
+import { Observable } from 'rxjs/Observable';
+import { Team } from '../model/photo';
 
 @Component({
   selector: 'app-photo-upload',
@@ -20,18 +23,29 @@ export class PhotoUploadComponent implements OnInit {
   public nome: string;
   public cognome: string;
   public squadra: string;
+  public selectTeam = true;
+  public teams: Observable<Team[]>;
 
   constructor(
     private cloudinary: Cloudinary,
     private zone: NgZone,
     private http: HttpClient,
     private router: Router,
+    private photoAlbum: PhotoAlbum,
     private snackBar: MatSnackBar
   ) {
     this.responses = [];
   }
 
+  toggleTeamSelect() {
+    this.selectTeam = !this.selectTeam;
+  }
+
   ngOnInit(): void {
+
+    this.teams = this.photoAlbum.getPhotos();
+
+
     // Create the file uploader, wire it to upload to your account
     const uploaderOptions: FileUploaderOptions = {
       url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,

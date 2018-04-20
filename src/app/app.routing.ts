@@ -4,12 +4,13 @@ import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoUploadComponent } from './photo-album/photo-upload.component';
 import { KeyGuard } from './key.guard';
 import { LoginComponent } from './login/login/login.component';
+import { ReadOnlyGuard } from './read-only.guard';
 
 const appRoutes: Routes = [
     {
         path: 'photos',
         component: PhotoListComponent,
-        canActivate: [KeyGuard]
+        canActivate: [ReadOnlyGuard]
     },
     {
         path: 'photos/new',

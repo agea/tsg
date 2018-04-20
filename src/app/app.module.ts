@@ -32,6 +32,7 @@ import { Cloudinary } from 'cloudinary-core';
 import { LoginComponent } from './login/login/login.component';
 import { KeyGuard } from './key.guard';
 import { FormsModule } from '@angular/forms';
+import { ReadOnlyGuard } from './read-only.guard';
 
 export const cloudinaryLib = {
     Cloudinary: Cloudinary
@@ -44,7 +45,11 @@ try {
         key = decodeURIComponent(window.location.search).match(/key=\[(\w+)\]/)[1];
         localStorage.setItem('key', key);
     }
-    config = JSON.parse(sjcl.decrypt(key, JSON.stringify(encryptedConfig)));
+    try {
+        config = JSON.parse(sjcl.decrypt(key, JSON.stringify(encryptedConfig.read)));
+    } catch (err) {
+        config = JSON.parse(sjcl.decrypt(key, JSON.stringify(encryptedConfig.write)));
+    }
 } catch (err) {
     localStorage.removeItem('key');
 }
@@ -90,6 +95,7 @@ try {
     ],
     providers: [
         KeyGuard,
+        ReadOnlyGuard,
         PhotoAlbum
     ],
     bootstrap: [AppComponent]
