@@ -1,16 +1,15 @@
 <button mat-fab class="add-button" routerLink="new" color="accent">
-        <mat-icon aria-label="Add">add</mat-icon>
+    <mat-icon aria-label="Add">add</mat-icon>
 </button>
 
-<mat-list>
-    <mat-list-item *ngFor="let photo of photos | async">
-        <cl-image matListAvatar public-id={{photo.public_id}} class="thumbnail inline" width="150" height="150" crop="fit" quality="80"
-            format="jpg">
-        </cl-image>
-        <h3 matLine> {{photo.public_id}} </h3>
-        <p matLine>
-            <span> {{photo | json}} </span>
-        </p>
-        <mat-divider  *ngIf="!last"></mat-divider>
-    </mat-list-item>
-</mat-list>
+<mat-card *ngFor="let team of teams | async">
+    <mat-card-header>
+        <mat-card-title>{{team.name}}
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="photo" *ngFor="let photo of team.photos" [style.background-image]="photo.url">
+            <div class="name">{{photo.name}} {{photo.surname}}</div>
+        </div>
+    </mat-card-content>
+</mat-card>

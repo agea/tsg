@@ -2,6 +2,8 @@ import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-photo-upload',
@@ -15,15 +17,18 @@ export class PhotoUploadComponent implements OnInit {
 
   public hasBaseDropZoneOver = false;
   public uploader: FileUploader;
-  public title: string;
+  public nome: string;
+  public cognome: string;
+  public squadra: string;
 
   constructor(
     private cloudinary: Cloudinary,
     private zone: NgZone,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.responses = [];
-    this.title = '';
   }
 
   ngOnInit(): void {
@@ -50,11 +55,7 @@ export class PhotoUploadComponent implements OnInit {
       // Add Cloudinary's unsigned upload preset to the upload form
       form.append('upload_preset', this.cloudinary.config().upload_preset);
       // Add built-in and custom tags for displaying the uploaded photo in the list
-      let tags = 'teams-' + new Date().getFullYear();
-      if (this.title) {
-        form.append('context', `photo=${this.title}`);
-        tags += `,${this.title}`;
-      }
+      const tags = 'teams-' + new Date().getFullYear();
       // Upload to a custom folder
       // Note that by default, when uploading via the API, folders are not automatically created in your Media Library.
       // In order to automatically create the folders based on the API requests,
@@ -65,7 +66,9 @@ export class PhotoUploadComponent implements OnInit {
       // Add file to upload
       form.append('file', fileItem);
 
-      form.append('public_id', 'my-fancy-id');
+      const re = /\W+/g;
+
+      form.append('public_id', `${this.squadra.replace(re, '_')}-${this.cognome.replace(re, '_')}-${this.nome.replace(re, '_')}`);
 
       // Use default "withCredentials" value for CORS requests
       fileItem.withCredentials = false;
@@ -79,6 +82,14 @@ export class PhotoUploadComponent implements OnInit {
       // as part of the XHR request to upload the files.
       // Running in a custom zone forces change detection
       this.zone.run(() => {
+
+        if (fileItem.status === 200) {
+          this.router.navigate(['/']);
+          this.snackBar.open('Foto caricata', null, { duration: 3000 });
+        } else if (fileItem.status && fileItem.status !== 200) {
+          this.snackBar.open('Errore upload', null, { duration: 3000 });
+        }
+
         // Update an existing entry if it's upload hasn't completed yet
 
         // Find the id of an existing item
@@ -118,27 +129,6 @@ export class PhotoUploadComponent implements OnInit {
         }
       );
   }
-
-  updateTitle(value: string) {
-    this.title = value;
-  }
-
-  // Delete an uploaded image
-  // Requires setting "Return delete token" to "Yes" in your upload preset configuration
-  // See also https://support.cloudinary.com/hc/en-us/articles/202521132-How-to-delete-an-image-from-the-client-side-
-  deleteImage = function (data: any, index: number) {
-    const url = `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/delete_by_token`;
-    const headers = new Headers({ 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' });
-    const options = { headers: headers };
-    const body = {
-      token: data.delete_token
-    };
-    this.http.post(url, body, options).subscribe(response => {
-      console.log(`Deleted image - ${data.public_id} ${response.result}`);
-      // Remove deleted item for responses
-      this.responses.splice(index, 1);
-    });
-  };
 
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;

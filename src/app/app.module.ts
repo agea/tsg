@@ -47,7 +47,6 @@ try {
     config = JSON.parse(sjcl.decrypt(key, JSON.stringify(encryptedConfig)));
 } catch (err) {
     localStorage.removeItem('key');
-    console.log(err);
 }
 
 @NgModule({

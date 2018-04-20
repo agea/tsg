@@ -2,4 +2,18 @@
     position: absolute;
     top: 27px;
     right: 27px;
+    z-index:999;
+}
+
+form .mat-form-field {
+    width: 100%;
+}
+
+mat-progress-spinner{
+    margin: 20px auto;
+}
+
+form a, form a label {
+    display: block;
+    width: 100%;
 }

@@ -15,7 +15,7 @@ export class KeyGuard implements CanActivate {
     const c = this.cloudinary.config();
     if (!c.cloud_name) {
       this.router.navigate(['/login']);
-      this.snackBar.open('Chiave non valida');
+      this.snackBar.open('Password non valida', null, { duration: 3000 });
       return false;
     }
     return true;

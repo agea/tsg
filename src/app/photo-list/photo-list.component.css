@@ -2,4 +2,36 @@
     position: absolute;
     top: 27px;
     right: 27px;
+    z-index: 999;
+}
+
+mat-card {
+    margin-bottom: 1em;
+}
+
+mat-card-title{
+    text-transform: capitalize;
+}
+
+.photo {
+    margin: 5px ! important;
+    display: inline-block;
+    height: 128px;
+    width: 128px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.photo .name{
+    text-transform: capitalize;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 80%;
+    text-align: center;
+    padding-bottom: 2px;
 }

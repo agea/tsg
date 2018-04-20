@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {PhotoAlbum} from '../model/photo-album.service';
-import {Photo} from '../model/photo';
+import {Photo, Team} from '../model/photo';
 
 @Component({
     selector: 'app-photo-list',
@@ -10,13 +10,13 @@ import {Photo} from '../model/photo';
 })
 export class PhotoListComponent implements OnInit {
 
-    public photos: Observable<Photo[]>;
+    public teams: Observable<Team[]>;
 
     constructor(
         public photoAlbum: PhotoAlbum
     ) { }
 
     ngOnInit(): void {
-        this.photos = this.photoAlbum.getPhotos();
+        this.teams = this.photoAlbum.getPhotos();
     }
 }

@@ -7,13 +7,17 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
     styleUrls: ['app.component.css']
 
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-    constructor(private cloudinary: Cloudinary) {
+    constructor(private cloudinary: Cloudinary) { }
 
+    loggedIn() {
+        return !!this.cloudinary.config().cloud_name;
     }
-    ngOnInit() {
 
+    logout() {
+        localStorage.removeItem('key');
+        window.location.href = '/';
     }
 
 }
