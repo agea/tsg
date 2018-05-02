@@ -16,7 +16,7 @@ export class AppComponent {
     }
 
     logout() {
-        localStorage.removeItem('key');
+        localStorage.removeItem('config');
         window.location.href = '/';
     }
 

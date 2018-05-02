@@ -11,6 +11,7 @@ import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@c
 
 import {
     MatToolbarModule, MatFormFieldModule, MatInputModule,
+    MatExpansionModule,
     MatCardModule, MatButtonModule, MatIconModule, MatListModule,
     MatTableModule, MatPaginatorModule, MatSortModule,
     MatMenuModule, MatSnackBarModule, MatProgressSpinnerModule,
@@ -23,10 +24,8 @@ import { AppComponent } from './app.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoUploadComponent } from './photo-album/photo-upload.component';
 import { PhotoAlbum } from './model/photo-album.service';
-import encryptedConfig from './config';
 import { routing } from './app.routing';
 
-import * as sjcl from 'sjcl';
 import * as cloudinary from 'cloudinary-core';
 import { Cloudinary } from 'cloudinary-core';
 import { LoginComponent } from './login/login/login.component';
@@ -38,22 +37,15 @@ export const cloudinaryLib = {
     Cloudinary: Cloudinary
 };
 
-let config = { cloud_name: null, upload_preset: null };
+export let config: any = null;
 try {
-    let key = localStorage.getItem('key');
-    if (!key) {
-        key = decodeURIComponent(window.location.search).match(/key=\[(\w+)\]/)[1];
-        localStorage.setItem('key', key);
-    }
-    try {
-        config = JSON.parse(sjcl.decrypt(key, JSON.stringify(encryptedConfig.read)));
-    } catch (err) {
-        config = JSON.parse(sjcl.decrypt(key, JSON.stringify(encryptedConfig.write)));
-    }
+    config = JSON.parse(localStorage.getItem('config'));
 } catch (err) {
-    localStorage.removeItem('key');
+    console.log(err);
 }
 
+console.log('APP MODULE CONFIG:');
+console.log(config);
 @NgModule({
     imports: [
         FormsModule,
@@ -73,6 +65,7 @@ try {
         MatButtonModule,
         MatIconModule,
         MatMenuModule,
+        MatExpansionModule,
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
