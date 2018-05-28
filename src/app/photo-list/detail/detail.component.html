@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>{{photo.name}} {{photo.surname}}</h2>
+<div mat-dialog-content>
+  <img [src]="photo.fullUrl">
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="close()">Ok</button>
+</div>

@@ -5,12 +5,9 @@
     z-index: 999;
 }
 
-mat-card {
-    margin-bottom: 1em;
-}
-
-mat-card-title{
+mat-panel-title strong{
     text-transform: capitalize;
+    white-space: nowrap;
 }
 
 .photo {

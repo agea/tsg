@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Cloudinary } from '@cloudinary/angular-5.x';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { Photo, Team } from './photo';
-import { Cloudinary } from '@cloudinary/angular-5.x';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable()
 export class PhotoAlbum {
@@ -24,7 +23,7 @@ export class PhotoAlbum {
             // Note that this is practice is DISCOURAGED in production code and is here
             // for demonstration purposes only
             // *************************************************************************
-            version: Math.ceil(new Date().getTime() / 1000)
+            version: this.cloudinary.config().upload_preset ? Math.ceil(new Date().getTime() / 1000) : undefined
         });
 
         const re = /_/g;
@@ -41,6 +40,8 @@ export class PhotoAlbum {
                     photo.name = strings[2].replace(re, ' ');
                     // tslint:disable-next-line:max-line-length
                     photo.url = this.sanitizer.bypassSecurityTrustStyle(`url('https://res.cloudinary.com/${this.cloudinary.config().cloud_name}/image/upload/c_fit,h_256,q_75,w_256/v1/${photo.public_id}.jpg')`);
+                    // tslint:disable-next-line:max-line-length
+                    photo.fullUrl = this.sanitizer.bypassSecurityTrustUrl(`https://res.cloudinary.com/${this.cloudinary.config().cloud_name}/image/upload/c_fit,h_640,q_75,w_640/v1/${photo.public_id}.jpg`);
                     let team = teams.find(t => t.name === teamName);
                     if (!team) {
                         team = new Team(teamName);

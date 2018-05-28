@@ -3,6 +3,7 @@ export class Photo {
   context: any;
   name: string;
   url: any;
+  fullUrl: any;
   surname: string;
 }
 

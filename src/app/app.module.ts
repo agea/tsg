@@ -32,6 +32,7 @@ import { LoginComponent } from './login/login/login.component';
 import { KeyGuard } from './key.guard';
 import { FormsModule } from '@angular/forms';
 import { ReadOnlyGuard } from './read-only.guard';
+import { DetailComponent } from './photo-list/detail/detail.component';
 
 export const cloudinaryLib = {
     Cloudinary: Cloudinary
@@ -80,11 +81,13 @@ console.log(config);
         MatRadioModule,
         routing
     ],
+    entryComponents: [DetailComponent],
     declarations: [
         AppComponent,
         PhotoListComponent,
         PhotoUploadComponent,
-        LoginComponent
+        LoginComponent,
+        DetailComponent
     ],
     providers: [
         KeyGuard,
