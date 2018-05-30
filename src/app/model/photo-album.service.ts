@@ -39,7 +39,7 @@ export class PhotoAlbum {
                     photo.surname = strings[1].replace(re, ' ');
                     photo.name = strings[2].replace(re, ' ');
                     // tslint:disable-next-line:max-line-length
-                    photo.url = this.sanitizer.bypassSecurityTrustStyle(`url('https://res.cloudinary.com/${this.cloudinary.config().cloud_name}/image/upload/c_fit,h_256,q_75,w_256/v1/${photo.public_id}.jpg')`);
+                    photo.url = this.sanitizer.bypassSecurityTrustStyle(`url('https://res.cloudinary.com/${this.cloudinary.config().cloud_name}/image/upload/c_fill,g_auto:face,h_256,q_75,w_256/v1/${photo.public_id}.jpg')`);
                     // tslint:disable-next-line:max-line-length
                     photo.fullUrl = this.sanitizer.bypassSecurityTrustUrl(`https://res.cloudinary.com/${this.cloudinary.config().cloud_name}/image/upload/c_fit,h_640,q_75,w_640/v1/${photo.public_id}.jpg`);
                     let team = teams.find(t => t.name === teamName);
