@@ -1,9 +1,10 @@
 import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { PhotoListComponent } from './photo-list/photo-list.component';
-import { PhotoUploadComponent } from './photo-album/photo-upload.component';
+import { RouterModule, Routes } from '@angular/router';
+import { CalendarComponent } from './calendar/calendar.component';
 import { KeyGuard } from './key.guard';
 import { LoginComponent } from './login/login/login.component';
+import { PhotoUploadComponent } from './photo-album/photo-upload.component';
+import { PhotoListComponent } from './photo-list/photo-list.component';
 import { ReadOnlyGuard } from './read-only.guard';
 
 const appRoutes: Routes = [
@@ -23,8 +24,7 @@ const appRoutes: Routes = [
     },
     {
         path: '',
-        redirectTo: '/photos',
-        pathMatch: 'full'
+        component: CalendarComponent
     }
 ];
 

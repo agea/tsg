@@ -1,38 +1,32 @@
 'use strict';
 // Angular modules
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+// Cloudinary module
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
 // File upload module
 import { FileUploadModule } from 'ng2-file-upload';
-// Cloudinary module
-import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
-
-import {
-    MatToolbarModule, MatFormFieldModule, MatInputModule,
-    MatExpansionModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatListModule,
-    MatTableModule, MatPaginatorModule, MatSortModule,
-    MatMenuModule, MatSnackBarModule, MatProgressSpinnerModule,
-    MatSelectModule, MatTooltipModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatProgressBarModule,
-    MatRadioButton, MatRadioModule, MatRadioGroup, MatSidenavModule
-} from '@angular/material';
-
 // Application modules
 import { AppComponent } from './app.component';
-import { PhotoListComponent } from './photo-list/photo-list.component';
-import { PhotoUploadComponent } from './photo-album/photo-upload.component';
-import { PhotoAlbum } from './model/photo-album.service';
 import { routing } from './app.routing';
-
-import * as cloudinary from 'cloudinary-core';
-import { Cloudinary } from 'cloudinary-core';
-import { LoginComponent } from './login/login/login.component';
+import { CalendarComponent } from './calendar/calendar.component';
 import { KeyGuard } from './key.guard';
-import { FormsModule } from '@angular/forms';
-import { ReadOnlyGuard } from './read-only.guard';
+import { LoginComponent } from './login/login/login.component';
+import { PhotoAlbum } from './model/photo-album.service';
+import { PhotoUploadComponent } from './photo-album/photo-upload.component';
 import { DetailComponent } from './photo-list/detail/detail.component';
+import { PhotoListComponent } from './photo-list/photo-list.component';
+import { ReadOnlyGuard } from './read-only.guard';
+
+
+
+
+
 
 export const cloudinaryLib = {
     Cloudinary: Cloudinary
@@ -85,6 +79,7 @@ console.log(config);
     declarations: [
         AppComponent,
         PhotoListComponent,
+        CalendarComponent,
         PhotoUploadComponent,
         LoginComponent,
         DetailComponent
