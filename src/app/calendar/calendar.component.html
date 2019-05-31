@@ -10,7 +10,9 @@
 
     <div *ngFor="let match of futureMatches" class="card">
       <mat-toolbar color="accent">
-        {{match.date | date:'dd/MM/yyyy HH:mm'}}
+        <div>
+          {{match.date | date:'dd/MM/yyyy HH:mm'}}
+        </div>
       </mat-toolbar>
 
       <h2>{{match.team1}}</h2>
@@ -29,7 +31,9 @@
 
     <div *ngFor="let round of rounds" class="card">
       <mat-toolbar color="accent">
-        Girone {{round.name}}
+        <div>
+          Girone {{round.name}}
+        </div>
       </mat-toolbar>
 
       <table class="mat-table">
@@ -60,7 +64,9 @@
 
     <div *ngFor="let match of pastMatches" class="card">
       <mat-toolbar color="accent">
-        {{match.date | date:'dd/MM/yyyy HH:mm'}}
+        <div>
+          {{match.date | date:'dd/MM/yyyy HH:mm'}}
+        </div>
       </mat-toolbar>
 
       <h2>{{match.team1}}</h2>

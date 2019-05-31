@@ -39,7 +39,7 @@
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/node": "~6.0.60",
-    "firebase-tools": "^3.18.4",
+    "firebase-tools": "^6.10.0",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
     "typescript": "~2.5.3"
