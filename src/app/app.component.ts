@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 
 @Component({
@@ -9,10 +9,16 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 })
 export class AppComponent {
 
-    constructor(private cloudinary: Cloudinary) { }
+    loggedIn = false;
+    admin = false;
+    gsheet = '';
 
-    loggedIn() {
-        return !!this.cloudinary.config().cloud_name;
+    constructor(private cloudinary: Cloudinary) {
+        this.loggedIn = !!this.cloudinary.config().cloud_name;
+        this.admin = !!this.cloudinary.config().upload_preset;
+        try {
+            this.gsheet = JSON.parse(localStorage.getItem('config')).google_sheet;
+        } catch (err) { }
     }
 
     logout() {

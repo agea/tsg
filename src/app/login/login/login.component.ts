@@ -32,18 +32,20 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    try {
-      let config: any;
+    if (this.key) {
       try {
-        config = JSON.parse(sjcl.decrypt(this.key, read));
+        let config: any;
+        try {
+          config = JSON.parse(sjcl.decrypt(this.key, read));
+        } catch (err) {
+          config = JSON.parse(sjcl.decrypt(this.key, write));
+        }
+        localStorage.setItem('config', JSON.stringify(config));
+        window.location.href = '/';
       } catch (err) {
-        config = JSON.parse(sjcl.decrypt(this.key, write));
+        console.log(err);
+        this.snackBar.open('Password non valida', null, { duration: 3000 });
       }
-      localStorage.setItem('config', JSON.stringify(config));
-      window.location.href = '/';
-    } catch (err) {
-      console.log(err);
-      this.snackBar.open('Password non valida', null, { duration: 3000 });
     }
 
   }

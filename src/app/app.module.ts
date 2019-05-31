@@ -3,7 +3,14 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import {
+    MatButtonModule, MatCardModule, MatDatepickerModule, MatDialogModule, //
+    MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, //
+    MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, //
+    MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, //
+    MatSelectModule, MatSidenavModule, MatSnackBarModule, MatSortModule, // 
+    MatTableModule, MatToolbarModule, MatTooltipModule
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Cloudinary module

@@ -1,15 +1,75 @@
-<ul>
-  <li *ngFor="let match of futureMatches ">
-    {{match | json}}
-  </li>
-</ul>
-<ul>
-  <li *ngFor="let round of rounds">
-    {{round | json}}
-  </li>
-</ul>
-<ul>
-  <li *ngFor="let match of pastMatches ">
-    {{match | json}}
-  </li>
-</ul>
+<mat-accordion multi="true">
+
+  <mat-expansion-panel expanded="true" *ngIf="futureMatches.length">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>Prossime partite</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let match of futureMatches" class="card">
+      <mat-toolbar color="accent">
+        {{match.date | date:'dd/MM/yyyy HH:mm'}}
+      </mat-toolbar>
+
+      <h2>{{match.team1}}</h2>
+      Vs
+      <h2>{{match.team2}}</h2>
+    </div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>Gironi</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let round of rounds" class="card">
+      <mat-toolbar color="accent">
+        Girone {{round.name}}
+      </mat-toolbar>
+
+      <table class="mat-table">
+        <thead>
+          <tr class="mat-header-row">
+            <th class="mat-header-cell">Squadra</th>
+            <th class="mat-header-cell">Punti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let team of round.teams" class="mat-row">
+            <td class="mat-cell">{{team.name}}</td>
+            <td class="mat-cell">{{team.points}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel *ngIf="pastMatches.length">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>Risultati</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+
+    <div *ngFor="let match of pastMatches" class="card">
+      <mat-toolbar color="accent">
+        {{match.date | date:'dd/MM/yyyy HH:mm'}}
+      </mat-toolbar>
+
+      <h2>{{match.team1}}</h2>
+      Vs
+      <h2>{{match.team2}}</h2>
+      <mat-divider></mat-divider>
+      <h1>{{match.result}}</h1>
+    </div>
+
+
+  </mat-expansion-panel>
+</mat-accordion>

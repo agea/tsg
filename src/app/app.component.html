@@ -2,11 +2,23 @@
   <mat-sidenav #sidenav mode="push">
     <mat-nav-list>
       <a mat-list-item routerLink="/" (click)="sidenav.toggle()">
-        <mat-icon aria-label="home">home</mat-icon> Home
+        <mat-icon aria-label="home">calendar_today</mat-icon> Calendario
         <mat-divider></mat-divider>
       </a>
-      <a *ngIf="loggedIn()" mat-list-item routerLink="/logout" (click)="logout()">
-        <mat-icon aria-label="login">exit_to_app</mat-icon> Logout
+      <a *ngIf="loggedIn" mat-list-item routerLink="/photos" (click)="sidenav.toggle()">
+        <mat-icon aria-label="login">account_box</mat-icon> Foto
+        <mat-divider></mat-divider>
+      </a>
+      <a *ngIf="admin" mat-list-item [href]="gsheet" target="_blank" (click)="sidenav.toggle()">
+        <mat-icon aria-label="login">grid_on</mat-icon> Aggiorna dati
+        <mat-divider></mat-divider>
+      </a>
+      <a *ngIf="!loggedIn" mat-list-item routerLink="/login" (click)="sidenav.toggle()">
+        <mat-icon aria-label="login">lock</mat-icon> Login
+        <mat-divider></mat-divider>
+      </a>
+      <a *ngIf="loggedIn" mat-list-item routerLink="/logout" (click)="logout()">
+        <mat-icon aria-label="logout">exit_to_app</mat-icon> Logout
         <mat-divider></mat-divider>
       </a>
     </mat-nav-list>

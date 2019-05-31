@@ -2,7 +2,7 @@
     <mat-icon aria-label="Add">add</mat-icon>
 </button>
 
-<mat-accordion multi="true">
+<mat-accordion>
 
     <mat-expansion-panel *ngFor="let team of teams | async">
         <mat-expansion-panel-header>
@@ -11,7 +11,8 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <div (click)="openDialog(photo)" class="photo" *ngFor="let photo of team.photos" [style.background-image]="photo.url">
+        <div (click)="openDialog(photo)" class="photo" *ngFor="let photo of team.photos"
+            [style.background-image]="photo.url">
             <div class="name">{{photo.name}} {{photo.surname}}</div>
         </div>
 
