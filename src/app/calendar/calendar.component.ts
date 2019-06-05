@@ -15,6 +15,8 @@ export class CalendarComponent {
   futureMatches: Match[] = [];
   pastMatches: Match[] = [];
 
+  pending = 2;
+
   constructor() {
 
     const firebase = window['firebase'];
@@ -40,6 +42,7 @@ export class CalendarComponent {
         round.teams.push({ name: value[1], points: value[2] });
       });
       this.rounds.splice(0, 1);
+      this.done(db);
     });
 
     db.ref('masterSheet/1').on('value', snapshot => {
@@ -62,8 +65,16 @@ export class CalendarComponent {
         }
         this.items[1].push(value);
       });
+      this.done(db);
     });
 
+  }
+
+  private done(db) {
+    this.pending--;
+    if (!this.pending) {
+      db.goOffline();
+    }
   }
 
 }

@@ -1,3 +1,7 @@
+mat-progress-spinner {
+    margin: 50px auto;
+}
+
 .card {
     width: 240px;
     display: inline-block;

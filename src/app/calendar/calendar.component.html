@@ -1,4 +1,7 @@
-<mat-accordion multi="true">
+<mat-progress-spinner color="accent" mode="indeterminate" *ngIf="pending">
+</mat-progress-spinner>
+
+<mat-accordion multi="true" *ngIf="!pending">
 
   <mat-expansion-panel expanded="true" *ngIf="futureMatches.length">
 
