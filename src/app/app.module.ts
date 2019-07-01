@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Cloudinary module
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
+import { NgTournamentTreeModule } from 'ng-tournament-tree';
 // File upload module
 import { FileUploadModule } from 'ng2-file-upload';
 // Application modules
@@ -29,7 +30,7 @@ import { PhotoUploadComponent } from './photo-album/photo-upload.component';
 import { DetailComponent } from './photo-list/detail/detail.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { ReadOnlyGuard } from './read-only.guard';
-
+import { MatchComponent } from './calendar/match/match.component';
 
 
 
@@ -80,6 +81,7 @@ console.log(config);
         MatNativeDateModule,
         MatProgressBarModule,
         MatRadioModule,
+        NgTournamentTreeModule,
         routing
     ],
     entryComponents: [DetailComponent],
@@ -89,7 +91,8 @@ console.log(config);
         CalendarComponent,
         PhotoUploadComponent,
         LoginComponent,
-        DetailComponent
+        DetailComponent,
+        MatchComponent
     ],
     providers: [
         KeyGuard,

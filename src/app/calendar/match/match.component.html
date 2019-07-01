@@ -1,0 +1,8 @@
+<mat-card>
+  <div>
+    {{match.teams[0].name}} - {{match.teams[1].name}}
+  </div>
+  <div *ngIf="match.teams[0].score + match.teams[1].score">
+    {{match.teams[0].score}} - {{match.teams[1].score}}
+  </div>
+</mat-card>

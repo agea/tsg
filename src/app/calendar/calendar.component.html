@@ -28,6 +28,21 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
+        <strong>Fase finale</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let final of finals">
+      <h2>{{final.tournament}}</h2>
+      <ngtt-single-elimination-tree [matchTemplate]="matchTemplate" [tournament]="final">
+      </ngtt-single-elimination-tree>
+    </div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
         <strong>Gironi</strong>
       </mat-panel-title>
     </mat-expansion-panel-header>
@@ -82,3 +97,7 @@
 
   </mat-expansion-panel>
 </mat-accordion>
+
+<ng-template #matchTemplate let-match>
+  <app-match [match]="match"></app-match>
+</ng-template>
