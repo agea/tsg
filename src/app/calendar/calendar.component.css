@@ -20,6 +20,10 @@ mat-progress-spinner {
 
 mat-expansion-panel {
     text-align: center;
+}
+
+.finals-wrapper {
+    max-width: 100%;
     overflow: auto;
 }
 

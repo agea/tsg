@@ -2,3 +2,20 @@ mat-card {
     padding: 24px !important;
     width: 202px;
 }
+
+h3 {
+    text-align: left;
+
+    .score {
+        float: right;
+    }
+}
+
+.finale {
+    position: relative;
+    top: -3em;
+}
+
+.second-card {
+    margin-top: 2em;
+}

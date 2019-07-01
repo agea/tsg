@@ -3,7 +3,7 @@
 
 <mat-accordion multi="true" *ngIf="!pending">
 
-  <mat-expansion-panel expanded="true" *ngIf="futureMatches.length">
+  <mat-expansion-panel [expanded]="finals.length==0" *ngIf="futureMatches.length">
 
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -19,23 +19,28 @@
       </mat-toolbar>
 
       <h2>{{match.team1}}</h2>
+      <h2 *ngIf="!match.team1">&nbsp;</h2>
       Vs
       <h2>{{match.team2}}</h2>
+      <h2 *ngIf="!match.team2">&nbsp;</h2>
+
     </div>
 
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel *ngIf="finals.length" expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <strong>Fase finale</strong>
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <div *ngFor="let final of finals">
-      <h2>{{final.tournament}}</h2>
-      <ngtt-single-elimination-tree [matchTemplate]="matchTemplate" [tournament]="final">
-      </ngtt-single-elimination-tree>
+    <div class="finals-wrapper">
+      <div *ngFor="let final of finals">
+        <h2>{{final.tournament}}</h2>
+        <ngtt-single-elimination-tree [matchTemplate]="matchTemplate" [tournament]="final">
+        </ngtt-single-elimination-tree>
+      </div>
     </div>
 
   </mat-expansion-panel>

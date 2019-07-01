@@ -1,0 +1,118 @@
+@import "ngtt-variables";
+
+.ngtt-de__container {
+    background-color: $ngtt-background-color;
+    padding: 25px 25px;
+    display: inline-block;
+}
+
+.ngtt-se__match-component-container {
+    display: flex;
+    height: $ngtt-match-wrapper-height;
+    width: $ngtt-match-wrapper-width;
+    background-color: $ngtt-match-container-background;
+}
+
+// winners bracket
+.ngtt-se__bracket-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.ngtt-se__round-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-width: $ngtt-match-wrapper-width + 2*($ngtt-round-gutters);
+}
+
+.ngtt-se__match-wrapper {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    width: $ngtt-match-wrapper-width;
+    padding: $ngtt-vertical-match-padding $ngtt-round-gutters;
+    position: relative;
+
+    // every bracket line
+    &::after {
+        display: flex;
+        flex-grow: 1;
+        right: 0;
+        position: absolute;
+        width: $ngtt-round-gutters - $ngtt-bracket-line-width;
+        height: 50%;
+        border-right: $ngtt-bracket-line-width solid $ngtt-line-color-main;
+        content: '';
+    }
+
+    &::before {
+        display: flex;
+        flex-grow: 1;
+        left: 0;
+        top: 50%;
+        position: absolute;
+        width: $ngtt-round-gutters;
+        border-top: $ngtt-bracket-line-width solid $ngtt-line-color-main;
+        content: '';
+    }
+
+    &:nth-child(odd) {
+        &::after {
+            top: 50%;
+            border-top-right-radius: $ngtt-bracket-border-radius;
+            border-top: $ngtt-bracket-line-width solid $ngtt-line-color-main;
+        }
+    }
+
+    &:nth-child(even) {
+        &::after {
+            top: 0;
+            border-bottom-right-radius: $ngtt-bracket-border-radius;
+            border-bottom: $ngtt-bracket-line-width solid $ngtt-line-color-main;
+        }
+    }
+
+    &:first-child:last-child {
+        &::after {
+            display: none;
+        }
+    }
+
+    .ngtt-se__round-wrapper:first-child>& {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+//finale match
+.ngtt-se__finale-match-wrapper {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    height: $ngtt-match-wrapper-height;
+    width: $ngtt-match-wrapper-width;
+    padding: $ngtt-vertical-match-padding $ngtt-round-gutters;
+    position: relative;
+
+    &>.ngtt-se__finale-component-container {
+        display: block;
+        height: $ngtt-match-wrapper-height;
+        width: $ngtt-match-wrapper-width;
+        background-color: $ngtt-match-container-background;
+        margin-bottom: 2*$ngtt-vertical-match-padding;
+    }
+
+    &::before {
+        display: flex;
+        flex-grow: 1;
+        left: 0;
+        top: 50%;
+        position: absolute;
+        width: $ngtt-round-gutters;
+        border-top: $ngtt-bracket-line-width solid $ngtt-line-color-main;
+        content: '';
+    }
+}

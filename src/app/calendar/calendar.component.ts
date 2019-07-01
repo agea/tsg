@@ -18,8 +18,6 @@ export class CalendarComponent {
 
   pending = 2;
 
-  finalsData = {};
-
   singleEliminationTournament: NgttTournament;
 
   finals: NgttTournament[];
@@ -126,7 +124,7 @@ export class CalendarComponent {
       ]
     };
 
-    this.finals = [this.singleEliminationTournament, this.singleEliminationTournament];
+    this.finals = [];
 
     const firebase = window['firebase'];
 
@@ -168,6 +166,35 @@ export class CalendarComponent {
             team2: value[2],
             result: value[3]
           };
+
+          if (value[8] && (match.date.isValid() || !value[0])) {
+            let t: NgttTournament;
+            t = this.finals.find(t => t.tournament == value[8]);
+            if (!t) {
+              t = {
+                tournament: value[8],
+                rounds: []
+              };
+              this.finals.push(t);
+            }
+            let n = value[9].toFixed(1);
+            let round = t.rounds.find(r => r.round == n);
+            if (!round) {
+              round = {
+                matches: [],
+                round: n,
+                type: 'winnerbracket'
+              };
+              t.rounds.push(round);
+            }
+            round.matches.push({
+              teams: [
+                { name: match.team1, score: match.result ? parseInt(match.result.split('-')[0]) : 0 },
+                { name: match.team2, score: match.result ? parseInt(match.result.split('-')[1]) : 0 }
+              ]
+            });
+          }
+
           if (match.date.isValid()) {
             if (match.date.isBefore()) {
               this.pastMatches.push(match);
@@ -179,6 +206,14 @@ export class CalendarComponent {
         });
         this.futureMatches.sort((a, b) => a.date.isBefore(b.date) ? -1 : 1);
         this.pastMatches.sort((a, b) => b.date.isBefore(a.date) ? -1 : 1);
+
+        this.finals.forEach(f => {
+          const final34 = f.rounds[f.rounds.length - 1];
+          f.rounds[f.rounds.length - 2].matches.forEach(m => {
+            m.teams.push(final34.matches[0].teams[0], final34.matches[0].teams[1]);
+          });
+          f.rounds.pop();
+        });
         this.done(db);
       });
     } else {

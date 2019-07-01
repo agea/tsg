@@ -10,10 +10,18 @@ export class MatchComponent implements OnInit {
 
   @Input() match: NgttMatch;
 
+  static finalecount = 0;
+  hide = false;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    if (this.match.teams.length == 4) {
+      MatchComponent.finalecount++;
+      this.hide = MatchComponent.finalecount % 2 === 0;
+    }
   }
+
 
 }

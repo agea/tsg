@@ -1,8 +1,28 @@
-<mat-card>
-  <div>
-    {{match.teams[0].name}} - {{match.teams[1].name}}
-  </div>
-  <div *ngIf="match.teams[0].score + match.teams[1].score">
-    {{match.teams[0].score}} - {{match.teams[1].score}}
-  </div>
-</mat-card>
+<div *ngIf="!hide" [ngClass]="{finale:match.teams.length==4}">
+
+  <h2 *ngIf="match.teams.length==4">Finale</h2>
+
+  <mat-card>
+    <h3>
+      {{match.teams[0].name}}&nbsp; <span *ngIf="match.teams[0].score + match.teams[1].score"
+        class="score">{{match.teams[0].score}}</span>
+    </h3>
+    <h3>
+      {{match.teams[1].name}}&nbsp; <span *ngIf="match.teams[0].score + match.teams[1].score"
+        class="score">{{match.teams[1].score}}</span>
+    </h3>
+  </mat-card>
+
+  <h3 class="second-card" *ngIf="match.teams.length==4">Finale 3°/4° posto</h3>
+
+  <mat-card *ngIf="match.teams.length==4">
+    <h3>
+      {{match.teams[2].name}}&nbsp; <span *ngIf="match.teams[2].score + match.teams[3].score"
+        class="score">{{match.teams[2].score}}</span>
+    </h3>
+    <h3>
+      {{match.teams[3].name}}&nbsp; <span *ngIf="match.teams[2].score + match.teams[3].score"
+        class="score">{{match.teams[3].score}}</span>
+    </h3>
+  </mat-card>
+</div>
